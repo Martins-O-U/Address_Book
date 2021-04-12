@@ -1,20 +1,16 @@
 .App {
   text-align: center;
-}
-
-#gradient {
+  height: 100vh;
   background-image: linear-gradient(to right, #1f0537, #eb12cf);
 }
 
-.nav {
-  background-color: #282828;
-  text-align: right;
-  position: fixed;
+nav {
+  /* position: fixed; */
   left: 0;
   top: 0;
   width: 100%;
   z-index: 10000;
-  cursor: default;
+  cursor: pointer;
   height: 3.5em;
   line-height: 3.5em;
   display: flex;
