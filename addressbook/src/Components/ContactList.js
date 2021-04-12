@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-// import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import axios from "axios"
 
@@ -14,23 +14,34 @@ export default function ContactList({ history}) {
         'Access-Control-Allow-Origin' : '*',
         'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         }})
-       // .get("http://localhost:4500/api/get")
       .then(res => {
-          console.log(res.data)
         setStoredData(res.data);
       });
   }, []);
 
-  const onSubmit = (data) => {
+  const errormessage = (message) => {
+    toast.error(
+      message,
+      { autoClose: 7000 },
+      {
+        position: toast.POSITION.TOP_LEFT,
+      }
+    );
+  };
 
-    console.log("Test..")
+  const onSubmit = (data) => {
+    // let user = []
+    // let data = user.append(datum)
+
+    // console.log("Test..")
+    // console.log(data)
     axios
       .post(`https://blinx-addressbook.herokuapp.com/api/create`, data)
       .then((res) => {
-        console.log (res.data);
+        history.push('/contactlist');
       })
       .catch((error) => {
-        console.log(error.message)
+        errormessage(error.message);
       });
   };
 
@@ -60,28 +71,28 @@ export default function ContactList({ history}) {
                                     <div className="modal-body">
                                         <div className="">
                                             <div className="contact-input-div">
-                                                <input type="text" name="business_name" className="" id="" 
+                                                <input type="text" name="name" className="" id="" 
                                                 placeholder="Enter Full Name" ref={register({ required: true })} />
                                                 {errors.business_name && <p className="error-para">Full Name</p>}
                                             </div>
                                             <div className="contact-input-div">
-                                                <input type="text" name="business_tel" className=""
+                                                <input type="text" name="phoneNumber" className=""
                                                 id="" placeholder="Enter Phone Number" ref={register({ required: true })} />
                                                 {errors.business_tel && <p className="error-para">Phone Number</p>}
                                             </div>
                                             <div className="contact-input-div">
-                                                <input type="text" name="business_email" id="your_email" className=""
+                                                <input type="text" name="email" id="your_email" className=""
                                                 ref={register({ required: true })} pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Enter Email Address" />
                                                 {errors.business_email && <p className="error-para">Email Address</p>}
                                             </div>
                                             <div className="contact-input-div">
-                                                <input type="text" name="business_state" className=""
+                                                <input type="text" name="address" className=""
                                                 id="" placeholder="Enter Home Address" ref={register({ required: true })} />
                                                 {errors.business_state && <p className="error-para">Address</p>}
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-primary">Save changes</button>
+                                                <button type="submit" className="btn btn-primary">Save changes</button>
                                             </div>
                                         </div>          
                                     </div>
