@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faUserEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faUserEdit, faTrash, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 
 export default function ContactList({ history}) {
   const { register, handleSubmit, errors } = useForm();
@@ -46,7 +46,11 @@ export default function ContactList({ history}) {
   return (
     <div>
         <div className="">
-            <h1 className="contact-intro">Contacts List</h1>
+            <div id="contact-heading-intro">
+            <h3 className="contact-intro">Contacts List</h3>
+            <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="add-to-contact"><FontAwesomeIcon icon={faUserPlus} size="1x"/> Add Contact</button>
+            </div>
+            <div className='allCards'>
             {storedData.map(user => (
                 <div class="card" key={user.id} id="contact-cards">
                     <div class="card-header">
@@ -57,18 +61,19 @@ export default function ContactList({ history}) {
                         <p class="card-text card-para-margine"><span id="special"><em>email: </em></span>{user.email}</p> <hr></hr>
                         <p class="card-text card-para-margine"><span id="special"><em>address:</em> </span> {user.address}</p> <hr></hr>
                         <a id='user-edit'>
-                            <FontAwesomeIcon icon={faUserEdit} size="1x" target="_blank" />
-                            <FontAwesomeIcon icon={faTrash} size="1x" target="_blank" id='trash'/>
+                            <FontAwesomeIcon icon={faUserEdit} size="1x"/>
+                            <FontAwesomeIcon icon={faTrash} size="1x" id='trash'/>
                         </a>
                     </div>
                 </div>
             ))}
+            </div>
         </div>       
       < div className="page-content">
             <div className="form-v10-content" id="addcontact">
                 <form className="form-detail" method="post" id="myform" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-left">
-                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Contact to List</button>
+                        {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Contact to List</button> */}
                         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog">
                                 <div className="modal-content">
