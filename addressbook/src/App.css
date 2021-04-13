@@ -1,10 +1,126 @@
 .App {
   text-align: center;
-  /* height: 100vh; */
   color: black;
   background-color: #fff8dc;
-  /* background-image: linear-gradient(to right, #1f0537, #eb12cf); */
 }
+
+nav {
+  /* position: fixed; */
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  cursor: pointer;
+  height: 3.5em;
+  line-height: 3.5em;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav a {
+  margin-bottom: 0;
+  list-style: none;
+  padding-left: 0;
+  position: relative;
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+  outline: 0;
+  font-weight: 600;
+  border-radius: 8px;
+  height: 2.5em;
+  line-height: 2.5em;
+  padding: 0 1.25em;
+}
+
+.Navlinks:hover {
+  color: #fff !important;
+  background: #696969;
+  padding-bottom: 5px;
+  padding-top: 4px;
+}
+
+nav a.active:before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -0.6em;
+  left: 50%;
+  margin-left: -0.75em;
+  border-left: solid 0.75em transparent;
+  border-right: solid 0.75em transparent;
+  border-top: solid 0.6em #282828;
+}
+
+@media only screen and (max-width: 490px) {
+  nav {
+    display: none;
+  }
+}
+
+/* =======Mobile Nav ======*/
+
+.mobileNav {
+  position: relative;
+  display: none;
+  text-align: left;
+}
+@media only screen and (max-width: 490px) {
+  .mobileNav {
+    display: block;
+  }
+}
+
+.menu-button {
+  position: relative;
+  z-index: 99;
+  cursor: pointer;
+}
+.menu-items {
+  padding: 0;
+  margin: 0;
+  background-color: white;
+}
+#mobile-anch {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  padding: 10px 16px;
+  border-bottom: 1px solid #555;
+}
+
+#mobile-anch:hover {
+  color: #fff !important;
+  background: #696969;
+  padding-bottom: 5px;
+}
+
+.nav {
+  width: 25vw;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: #888;
+  position: absolute;
+  top: 0;
+  z-index: 999;
+  background-color: #fff;
+  left: -27vw;
+  -webkit-transition: left 0.3s ease-in;
+  -o-transition: left 0.3s ease-in;
+  transition: left 0.3s ease-in;
+}
+.nav.show {
+  left: 0;
+}
+
+.close {
+  padding: 8px 2px 8px 10px;
+  display: flex;
+  float: right;
+  /* justify-content: flex-end; */
+}
+
+/* ========================= Add Contact Styling ==================== */
 
 #home-intro {
   margin-top: 20%;
@@ -64,65 +180,6 @@ hr {
   margin-top: 1px;
   margin-bottom: 2px;
 }
-
-nav {
-  /* position: fixed; */
-  left: 0;
-  top: 0;
-  width: 100%;
-  z-index: 10000;
-  cursor: pointer;
-  height: 3.5em;
-  line-height: 3.5em;
-  display: flex;
-  justify-content: space-between;
-}
-img {
-  margin-top: 7px;
-  border-radius: 7px;
-}
-
-nav a {
-  margin-bottom: 0;
-  list-style: none;
-  padding-left: 0;
-  position: relative;
-  color: blueviolet;
-  text-decoration: none;
-  outline: 0;
-  font-weight: 600;
-  border-radius: 8px;
-  height: 2.5em;
-  line-height: 2.5em;
-  padding: 0 1.25em;
-}
-
-.Navlinks:hover {
-  color: #fff !important;
-  background: #696969;
-  padding-bottom: 5px;
-  padding-top: 4px;
-}
-
-nav a.active:before {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -0.6em;
-  left: 50%;
-  margin-left: -0.75em;
-  border-left: solid 0.75em transparent;
-  border-right: solid 0.75em transparent;
-  border-top: solid 0.6em #282828;
-}
-
-@media only screen and (max-width: 490px) {
-  nav {
-    display: none;
-  }
-}
-
-/* ========================= Add Contact Styling ==================== */
 
 .error-para {
   color: red;
