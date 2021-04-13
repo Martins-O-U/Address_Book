@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import axios from "axios"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faUserEdit, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 export default function ContactList({ history}) {
   const { register, handleSubmit, errors } = useForm();
@@ -30,11 +32,7 @@ export default function ContactList({ history}) {
   };
 
   const onSubmit = (data) => {
-    // let user = []
-    // let data = user.append(datum)
 
-    // console.log("Test..")
-    // console.log(data)
     axios
       .post(`https://blinx-addressbook.herokuapp.com/api/create`, data)
       .then((res) => {
@@ -48,12 +46,22 @@ export default function ContactList({ history}) {
   return (
     <div>
         <div className="">
-            <h1 className="intro">Contacts</h1>
+            <h1 className="contact-intro">Contacts List</h1>
             {storedData.map(user => (
-            <div key={user.id} >
-                <p>{user.email}</p>
-                <p>{user.password}</p>
-            </div>
+                <div class="card" key={user.id} id="contact-cards">
+                    <div class="card-header">
+                        <h4 id='user-name'>{user.name}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text card-para-margine"><span id="special"><em>phone: </em></span>{user.phoneNumber}</p><hr></hr>
+                        <p class="card-text card-para-margine"><span id="special"><em>email: </em></span>{user.email}</p> <hr></hr>
+                        <p class="card-text card-para-margine"><span id="special"><em>address:</em> </span> {user.address}</p> <hr></hr>
+                        <a id='user-edit'>
+                            <FontAwesomeIcon icon={faUserEdit} size="1x" target="_blank" />
+                            <FontAwesomeIcon icon={faTrash} size="1x" target="_blank" id='trash'/>
+                        </a>
+                    </div>
+                </div>
             ))}
         </div>       
       < div className="page-content">
