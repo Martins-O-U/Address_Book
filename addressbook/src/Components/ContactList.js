@@ -52,18 +52,18 @@ export default function ContactList({ history}) {
             </div>
             <div className='allCards'>
             {storedData.map(user => (
-                <div class="card" key={user.id} id="contact-cards">
-                    <div class="card-header">
+                <div className="card" key={user.id} id="contact-cards">
+                    <div className="card-header">
                         <h4 id='user-name'>{user.name}</h4>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text card-para-margine"><span id="special"><em>phone: </em></span>{user.phoneNumber}</p><hr></hr>
-                        <p class="card-text card-para-margine"><span id="special"><em>email: </em></span>{user.email}</p> <hr></hr>
-                        <p class="card-text card-para-margine"><span id="special"><em>address:</em> </span> {user.address}</p> <hr></hr>
-                        <a id='user-edit'>
+                    <div className="card-body">
+                        <p className="card-text card-para-margine"><span id="special"><em>phone: </em></span>{user.phoneNumber}</p><hr></hr>
+                        <p className="card-text card-para-margine"><span id="special"><em>email: </em></span>{user.email}</p> <hr></hr>
+                        <p className="card-text card-para-margine"><span id="special"><em>address:</em> </span> {user.address}</p> <hr></hr>
+                        <span id='user-edit'>
                             <FontAwesomeIcon icon={faUserEdit} size="1x"/>
                             <FontAwesomeIcon icon={faTrash} size="1x" id='trash'/>
-                        </a>
+                        </span>
                     </div>
                 </div>
             ))}
@@ -73,7 +73,6 @@ export default function ContactList({ history}) {
             <div className="form-v10-content" id="addcontact">
                 <form className="form-detail" method="post" id="myform" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-left">
-                        {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Contact to List</button> */}
                         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog">
                                 <div className="modal-content">
@@ -103,7 +102,7 @@ export default function ContactList({ history}) {
                                                 id="" placeholder="Enter Home Address" ref={register({ required: true })} />
                                                 {errors.business_state && <p className="error-para">Address</p>}
                                             </div>
-                                            <div class="modal-footer">
+                                            <div className="modal-footer">
                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                 <button type="submit" className="btn btn-primary">Save changes</button>
                                             </div>
