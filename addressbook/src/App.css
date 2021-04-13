@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  height: 100vh;
+  /* height: 100vh; */
   color: black;
   background-color: #fff8dc;
   /* background-image: linear-gradient(to right, #1f0537, #eb12cf); */
@@ -136,4 +136,28 @@ nav a.active:before {
   margin-bottom: 25px;
   border: 1px solid transparent;
   border-bottom: 1px solid grey;
+}
+
+#pagination-ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  justify-content: baseline;
+  margin-top: 10px;
+}
+#pagination-div {
+  margin-top: 30px;
+}
+
+#pagination-page-num {
+  margin-right: 10px;
+}
+
+.page-item {
+  cursor: pointer;
+  border: 1px solid grey;
+}
+
+.landing-page {
+  height: 100vh;
 }

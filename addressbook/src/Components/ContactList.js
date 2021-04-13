@@ -4,9 +4,13 @@ import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faUserEdit, faTrash, faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import PaginationPage from "./Pagination";
+
 
 export default function ContactList({ history}) {
   const { register, handleSubmit, errors } = useForm();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(5);
 
   const [storedData, setStoredData] = useState([]);
   useEffect(() => {
@@ -24,7 +28,7 @@ export default function ContactList({ history}) {
   const errormessage = (message) => {
     toast.error(
       message,
-      { autoClose: 7000 },
+      { autoClose: 6000 },
       {
         position: toast.POSITION.TOP_LEFT,
       }
@@ -43,6 +47,12 @@ export default function ContactList({ history}) {
       });
   };
 
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const newStoredData = storedData.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   return (
     <div>
         <div className="">
@@ -51,22 +61,23 @@ export default function ContactList({ history}) {
             <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="add-to-contact"><FontAwesomeIcon icon={faUserPlus} size="1x"/> Add Contact</button>
             </div>
             <div className='allCards'>
-            {storedData.map(user => (
-                <div className="card" key={user.id} id="contact-cards">
-                    <div className="card-header">
-                        <h4 id='user-name'>{user.name}</h4>
+                {newStoredData.map(user => (
+                    <div className="card" key={user.id} id="contact-cards">
+                        <div className="card-header">
+                            <h4 id='user-name'>{user.name}</h4>
+                        </div>
+                        <div className="card-body">
+                            <p className="card-text card-para-margine"><em><span id="special">phone: </span>{user.phoneNumber}</em></p><hr></hr>
+                            <p className="card-text card-para-margine"><em><span id="special">email: </span>{user.email}</em></p> <hr></hr>
+                            <p className="card-text card-para-margine"><em><span id="special">address: </span> {user.address}</em></p> <hr></hr>
+                            <span id='user-edit'>
+                                <FontAwesomeIcon icon={faUserEdit} size="1x"/>
+                                <FontAwesomeIcon icon={faTrash} size="1x" id='trash'/>
+                            </span>
+                        </div>
                     </div>
-                    <div className="card-body">
-                        <p className="card-text card-para-margine"><span id="special"><em>phone: </em></span>{user.phoneNumber}</p><hr></hr>
-                        <p className="card-text card-para-margine"><span id="special"><em>email: </em></span>{user.email}</p> <hr></hr>
-                        <p className="card-text card-para-margine"><span id="special"><em>address:</em> </span> {user.address}</p> <hr></hr>
-                        <span id='user-edit'>
-                            <FontAwesomeIcon icon={faUserEdit} size="1x"/>
-                            <FontAwesomeIcon icon={faTrash} size="1x" id='trash'/>
-                        </span>
-                    </div>
-                </div>
-            ))}
+                ))}
+                <PaginationPage postPerPage={postPerPage} totalPosts={storedData.length} paginate={paginate} />
             </div>
         </div>       
       < div className="page-content">
